@@ -1,0 +1,45 @@
+body {
+    background-color: black;
+    margin: 0;
+}
+
+#lightbox {
+    min-height: 100px;
+    text-align: center;
+    display: flex;
+    opacity: 0;
+}
+
+#lightbox #img-wrapper {
+    flex-grow: 2;
+    max-width: 85%;
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+#lightbox a.nav-button {
+    flex-grow: 1;
+    flex-basis: 3em;
+    font-size: 6em;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#lightbox a.nav-button.disabled {
+    opacity: 0;
+}
+
+#lightbox a.nav-button:hover {
+    background-color: #ccc;
+    color: #000;
+}
+
+#img-wrapper img {
+    margin: 2em;
+}
+
+#img-wrapper {
+    color: #fff;
+}
