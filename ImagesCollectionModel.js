@@ -17,9 +17,9 @@ function ImagesCollectionModel() {
             FlickrApi.getPhotos(this.pageOffset, this.IMAGES_PER_LOAD, function(totalCount, lightboxImages) {
                 self.images.push.apply(self.images, lightboxImages);
                 self.totalImagesCount = totalCount;
-                self.onImagesLoaded(lightboxImages);
                 self.pageOffset += 1;   // next page load will use the updated pageOffset
                 self.isLoading = false;
+                self.onImagesLoaded(lightboxImages);
             }, function(xhr) {
                 alert('Could not load images from Flickr API.');
                 self.isLoading = false;
@@ -38,6 +38,7 @@ function ImagesCollectionModel() {
 
         shouldLoadNextPage: function(currentIndex) {
             if (this.hasMoreImagesToLoad()) {
+                console.log('images length: ' + this.images.length);
                 return currentIndex > this.images.length - this.LOAD_OFFSET_THRESHOLD - 1;
             }
             return false;

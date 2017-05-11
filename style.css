@@ -38,7 +38,7 @@ body {
     opacity: 0;
 }
 
-#lightbox a.nav-button:hover {
+#lightbox a.nav-button:hover:not(.disabled) {
     background-color: #ccc;
     color: #000;
     opacity: 0.4;

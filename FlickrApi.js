@@ -9,19 +9,23 @@ var FlickrApi = {
         xhr.onload = function() {
             if (this.readyState == 4 && this.status == 200) {
                 let jsonResponse = JSON.parse(this.responseText);
-                let photoset = jsonResponse['photoset'];
-                let totalCount = photoset['total'];
-                let lightboxImages = photoset['photo'].map(function(obj) {
-                    let farmId = obj['farm'];
-                    let id = obj['id'];
-                    let serverId = obj['server'];
-                    let secret = obj['secret'];
-                    return new LightboxImage({
-                        imageUrl: `https://farm${farmId}.staticflickr.com/${serverId}/${id}_${secret}.jpg`,
-                        title: obj['title'],
+                if (jsonResponse['stat'] == 'ok') {
+                    let photoset = jsonResponse['photoset'];
+                    let totalCount = photoset['total'];
+                    let lightboxImages = photoset['photo'].map(function(obj) {
+                        let farmId = obj['farm'];
+                        let id = obj['id'];
+                        let serverId = obj['server'];
+                        let secret = obj['secret'];
+                        return new LightboxImage({
+                            imageUrl: `https://farm${farmId}.staticflickr.com/${serverId}/${id}_${secret}.jpg`,
+                            title: obj['title'],
+                        });
                     });
-                });
-                success(totalCount, lightboxImages);
+                    success(totalCount, lightboxImages);
+                } else {
+                    failure(jsonResponse['message']);
+                }
             }
         };
         xhr.onerror = function() {

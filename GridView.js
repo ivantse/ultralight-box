@@ -1,10 +1,6 @@
-function GridView(gridEl, window) {
+function GridView(gridEl) {
     return {
         cellsCount: 0,
-
-        initialize: function() {
-            // FIXME: setup to trigger onScrolledBottomInsideWindow
-        },
 
         addCellsWithImages: function(lightboxImages) {
             let self = this;
@@ -18,7 +14,6 @@ function GridView(gridEl, window) {
         },
 
         onCellSelected: function(index){},
-        onScrolledBottomInsideWindow: function(){},
 
         _buildCell: function(index, lightboxImage) {
             let self = this;
@@ -34,11 +29,6 @@ function GridView(gridEl, window) {
                 self.onCellSelected(index);
             });
             return cell;
-        },
-
-        isBottomInsideWindow() {
-            // FIXME
-            return false;
         },
     };
 };
