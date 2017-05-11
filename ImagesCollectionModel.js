@@ -1,7 +1,6 @@
 function ImagesCollectionModel() {
     return {
         IMAGES_PER_LOAD: 25,
-        LOAD_OFFSET_THRESHOLD: 10,
         isLoading: false,
         pageOffset: 1,
         totalImagesCount: 0,
@@ -9,9 +8,7 @@ function ImagesCollectionModel() {
         onImagesLoadedHandlers: [],
 
         loadNextPageOfImages: function() {
-            if (this.isLoading) {
-                return;
-            }
+            if (this.isLoading) { return }
             this.isLoading = true;
             let self = this;
             FlickrApi.getPhotos(this.pageOffset, this.IMAGES_PER_LOAD, function(totalCount, lightboxImages) {
@@ -34,13 +31,6 @@ function ImagesCollectionModel() {
 
         hasMoreImagesToLoad: function() {
             return this.images.length != this.totalImagesCount;
-        },
-
-        shouldLoadNextPage: function(currentIndex) {
-            if (this.hasMoreImagesToLoad()) {
-                return currentIndex > this.images.length - this.LOAD_OFFSET_THRESHOLD - 1;
-            }
-            return false;
         },
     }
 };

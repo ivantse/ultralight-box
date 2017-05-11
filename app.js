@@ -9,12 +9,8 @@ function UltralightBoxApp(bodyEl, gridEl, lightboxEl, overlayEl) {
     lightboxController.onDismissed = function() { bodyEl.classList.remove('scroll-disabled') };
 
     let gridView = new GridView(gridEl);
+    gridView.onCellSelected = function(index) { lightboxController.presentWithIndex(index) };
     let gridController = new GridController(gridView, model);
-    gridController.initialize({
-        cellSelected: function(index) {
-            lightboxController.presentWithIndex(index);
-        },
-    });
 
     let SCROLL_THRESHOLD_OFFSET = 50;   // so we load the next images before we get to the bottom of window
     let loadMorePagesIfNeeded = function() {
@@ -29,7 +25,5 @@ function UltralightBoxApp(bodyEl, gridEl, lightboxEl, overlayEl) {
     window.onscroll = loadMorePagesIfNeeded;
 
     // after loading images, load more if we need to (like on first load)
-    model.onImagesLoadedHandlers.push(function() {
-        loadMorePagesIfNeeded();
-    });
+    model.onImagesLoadedHandlers.push(loadMorePagesIfNeeded);
 };

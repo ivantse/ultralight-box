@@ -1,5 +1,6 @@
 function LightboxController(view, model) {
     return {
+        LOAD_OFFSET_THRESHOLD: 10,
         currentIndex: 0,
         onPresented: function(){},
         onDismissed: function(){},
@@ -23,6 +24,7 @@ function LightboxController(view, model) {
         },
 
         updateNavButtons: function() {
+            // we don't want to show an arrow if we can't actually go in that direction
             view.enableLeftArrow(this.canNavigateLeft());
             view.enableRightArrow(this.canNavigateRight());
         },
@@ -72,9 +74,18 @@ function LightboxController(view, model) {
             }
             this.currentIndex += 1;
             this.updateCurrentImage();
-            if (model.shouldLoadNextPage(this.currentIndex)) {
+
+            // if we're getting close to the last downloaded images, get the next page of images
+            if (this._shouldLoadNextPage()) {
                 model.loadNextPageOfImages();
             }
+        },
+
+        _shouldLoadNextPage: function() {
+            if (model.hasMoreImagesToLoad()) {
+                return this.currentIndex > model.images.length - this.LOAD_OFFSET_THRESHOLD - 1;
+            }
+            return false;
         },
     };
 }
