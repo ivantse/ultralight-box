@@ -6,12 +6,13 @@ function ImagesCollectionModel() {
         totalImagesCount: 0,
         images: [],
         onImagesLoadedHandlers: [],
+        flickrApi: new FlickrApi(true),
 
         loadNextPageOfImages: function() {
             if (this.isLoading) { return }
             this.isLoading = true;
             let self = this;
-            FlickrApi.getPhotos(this.pageOffset, this.IMAGES_PER_LOAD, function(totalCount, lightboxImages) {
+            this.flickrApi.getPhotos(this.pageOffset, this.IMAGES_PER_LOAD, function(totalCount, lightboxImages) {
                 self.images.push.apply(self.images, lightboxImages);
                 self.totalImagesCount = totalCount;
                 self.pageOffset += 1;   // next page load will use the updated pageOffset
