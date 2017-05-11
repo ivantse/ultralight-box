@@ -1,12 +1,12 @@
-function LightboxImage(properties) {
-    return {
-        thumbnailUrl: properties['thumbnailUrl'],
-        imageUrl: properties['imageUrl'],
-        title: properties['title'],
+class LightboxImage {
+    constructor(properties) {
+        this.thumbnailUrl = properties['thumbnailUrl'];
+        this.imageUrl = properties['imageUrl'];
+        this.title = properties['title'];
+    }
 
-        preloadImage: function() {
-            let image = new Image();
-            image.src = this.imageUrl;
-        },
-    };
-};
+    cacheImage() {
+        let image = new Image();
+        image.src = this.imageUrl;
+    }
+}

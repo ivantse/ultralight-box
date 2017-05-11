@@ -1,91 +1,90 @@
-function LightboxController(view, model) {
-    return {
-        LOAD_OFFSET_THRESHOLD: 10,
-        currentIndex: 0,
-        onPresented: function(){},
-        onDismissed: function(){},
+class LightboxController {
+    constructor(view, model) {
+        this.LOAD_OFFSET_THRESHOLD = 10;
+        this.currentIndex = 0;
+        this.onPresented = function(){};
+        this.onDismissed = function(){};
 
-        // setting up view/model with events
-        initialize: function() {
-            let self = this;
-            view.leftArrow.addEventListener('click', function() { self.previousImage(); });
-            view.rightArrow.addEventListener('click', function() { self.nextImage(); });
-            view.imgEl.addEventListener('click', function() { self.nextImage(); });
-            view.overlayEl.addEventListener('click', function() { self.dismissView(); });
-            model.onImagesLoadedHandlers.push(function() {
-                self.updateCurrentImage();
-            });
-            model.loadNextPageOfImages();
-        },
+        this.view = view;
+        this.model = model;
 
-        updateNavTitle: function() {
-            let text = `${this.currentIndex+1} OF ${model.totalImagesCount}`;
-            view.setNavText(text);
-        },
+        let self = this;
+        view.leftArrow.addEventListener('click', function() { self.previousImage(); });
+        view.rightArrow.addEventListener('click', function() { self.nextImage(); });
+        view.imgEl.addEventListener('click', function() { self.nextImage(); });
+        view.overlayEl.addEventListener('click', function() { self.dismissView(); });
+        model.onImagesLoadedHandlers.push(function() {
+            self.updateCurrentImage();
+        });
+    }
 
-        updateNavButtons: function() {
-            // we don't want to show an arrow if we can't actually go in that direction
-            view.enableLeftArrow(this.canNavigateLeft());
-            view.enableRightArrow(this.canNavigateRight());
-        },
+    updateNavTitle() {
+        let text = `${this.currentIndex+1} OF ${this.model.totalImagesCount}`;
+        this.view.setNavText(text);
+    }
 
-        updateCurrentImage: function() {
-            let lightboxImage = model.images[this.currentIndex];
-            view.setLightboxImage(lightboxImage);
-            this.updateNavTitle();
-            this.updateNavButtons();
-        },
+    updateNavButtons() {
+        // we don't want to show an arrow if we can't actually go in that direction
+        this.view.enableLeftArrow(this.canNavigateLeft());
+        this.view.enableRightArrow(this.canNavigateRight());
+    }
 
-        canNavigateLeft: function() {
-            return this.currentIndex > 0;
-        },
+    updateCurrentImage() {
+        let lightboxImage = this.model.images[this.currentIndex];
+        this.view.setLightboxImage(lightboxImage);
+        this.updateNavTitle();
+        this.updateNavButtons();
+    }
 
-        canNavigateRight: function() {
-            return this.currentIndex < model.images.length - 1;
-        },
+    canNavigateLeft() {
+        return this.currentIndex > 0;
+    }
 
-        presentWithIndex: function(index) {
-            if (index >= model.images.length) {
-                alert("Oops! You tried to select an image that isn't actualy there. Sorry about that!");
-                return;
-            }
-            this.currentIndex = index;
-            this.updateCurrentImage();
-            view.show();
-            this.onPresented();
-        },
+    canNavigateRight() {
+        return this.currentIndex < this.model.images.length - 1;
+    }
 
-        dismissView: function() {
-            view.hide();
-            this.onDismissed();
-        },
+    presentWithIndex(index) {
+        if (index >= this.model.images.length) {
+            alert("Oops! You tried to select an image that isn't actualy there. Sorry about that!");
+            return;
+        }
+        this.currentIndex = index;
+        this.updateCurrentImage();
+        this.view.show();
+        this.onPresented();
+    }
 
-        previousImage: function() {
-            if (!this.canNavigateLeft()) {
-                return;
-            }
-            this.currentIndex -= 1;
-            this.updateCurrentImage();
-        },
+    dismissView() {
+        this.view.hide();
+        this.onDismissed();
+    }
 
-        nextImage: function() {
-            if (!this.canNavigateRight()) {
-                return;
-            }
-            this.currentIndex += 1;
-            this.updateCurrentImage();
+    previousImage() {
+        if (!this.canNavigateLeft()) {
+            return;
+        }
+        this.currentIndex -= 1;
+        this.updateCurrentImage();
+    }
 
-            // if we're getting close to the last downloaded images, get the next page of images
-            if (this._shouldLoadNextPage()) {
-                model.loadNextPageOfImages();
-            }
-        },
+    nextImage() {
+        if (!this.canNavigateRight()) {
+            return;
+        }
+        this.currentIndex += 1;
+        this.updateCurrentImage();
 
-        _shouldLoadNextPage: function() {
-            if (model.hasMoreImagesToLoad()) {
-                return this.currentIndex > model.images.length - this.LOAD_OFFSET_THRESHOLD - 1;
-            }
-            return false;
-        },
-    };
+        // if we're getting close to the last downloaded images, get the next page of images
+        if (this._shouldLoadNextPage()) {
+            this.model.loadNextPageOfImages();
+        }
+    }
+
+    _shouldLoadNextPage() {
+        if (this.model.hasMoreImagesToLoad()) {
+            return this.currentIndex > this.model.images.length - this.LOAD_OFFSET_THRESHOLD - 1;
+        }
+        return false;
+    }
 }
