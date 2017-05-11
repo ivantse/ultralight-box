@@ -1,3 +1,5 @@
+'use strict';
+
 class LightboxView {
     constructor(lightboxEl, overlayEl) {
         let imageWrapper = document.createElement('div');

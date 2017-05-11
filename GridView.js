@@ -1,7 +1,10 @@
+'use strict';
+
 class GridView {
     constructor(gridEl) {
         this.cellsCount = 0;
         this.onCellSelected = function(index){};
+        this.gridEl = gridEl;
     }
 
     addCellsWithImages(lightboxImages) {
@@ -9,7 +12,7 @@ class GridView {
         let index = this.cellsCount;
         lightboxImages.forEach(function(lightboxImage) {
             let cell = self._buildCell(index, lightboxImage);
-            gridEl.appendChild(cell);
+            self.gridEl.appendChild(cell);
             index += 1;
         }, this);
         this.cellsCount += lightboxImages.length;

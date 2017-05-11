@@ -1,3 +1,5 @@
+'use strict';
+
 class ImagesCollectionModel {
     constructor() {
         this.IMAGES_PER_LOAD = 25;

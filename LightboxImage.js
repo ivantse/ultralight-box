@@ -1,3 +1,5 @@
+'use strict';
+
 class LightboxImage {
     constructor(properties) {
         this.thumbnailUrl = properties['thumbnailUrl'];

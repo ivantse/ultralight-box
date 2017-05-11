@@ -1,3 +1,5 @@
+'use strict';
+
 class FlickrApi {
     constructor(precacheImages) {
         this.API_KEY = '168abff2bd195fbc1105fe5252dfb3dc';

@@ -1,3 +1,5 @@
+'use strict';
+
 class LightboxController {
     constructor(view, model) {
         this.LOAD_OFFSET_THRESHOLD = 10;
