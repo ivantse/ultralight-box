@@ -5,15 +5,12 @@ function LightboxController(view, model) {
         // setting up view/model with events
         initialize: function() {
             let self = this;
-            view.leftArrow.addEventListener('click', function() {
-                self.previousImage();
-            });
-            view.rightArrow.addEventListener('click', function() {
-                self.nextImage();
-            });
-            model.onImagesLoaded = function() { 
+            view.leftArrow.addEventListener('click', function() { self.previousImage(); });
+            view.rightArrow.addEventListener('click', function() { self.nextImage(); });
+            view.overlayEl.addEventListener('click', function() { self.dismissView(); });
+            model.onImagesLoadedHandlers.push(function() {
                 self.updateCurrentImage();
-            };
+            });
             model.loadNextPageOfImages();
         },
 
@@ -40,6 +37,21 @@ function LightboxController(view, model) {
 
         canNavigateRight: function() {
             return this.currentIndex < model.images.length - 1;
+        },
+
+        openWithIndex: function(index) {
+            console.log('opening with index ' + index);
+            if (index >= model.images.length) {
+                alert("Oops! You tried to select an image that isn't actualy there. Sorry about that!");
+                return;
+            }
+            this.currentIndex = index;
+            this.updateCurrentImage();
+            view.show();
+        },
+
+        dismissView: function() {
+            view.hide();
         },
 
         previousImage: function() {

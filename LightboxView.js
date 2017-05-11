@@ -1,4 +1,4 @@
-function LightboxView(lightboxEl, properties) {
+function LightboxView(lightboxEl, overlayEl) {
     let imageWrapper = document.createElement('div');
     imageWrapper.setAttribute('id', 'img-wrapper');
     let navTextEl = document.createElement('div');
@@ -24,20 +24,27 @@ function LightboxView(lightboxEl, properties) {
     lightboxEl.appendChild(rightArrow);
 
     return {
-        navTextEl: navTextEl,
-        imgEl: imgEl,
-        titleEl: titleEl,
+        overlayEl: overlayEl,
         leftArrow: leftArrow,
         rightArrow: rightArrow,
 
+        hide: function() {
+            lightboxEl.style.display = 'none';
+            overlayEl.style.display = 'none';
+        },
+
+        show: function() {
+            lightboxEl.style.display = 'flex';
+            overlayEl.style.display = 'block';
+        },
+
         setLightboxImage: function(lightboxImage) {
-            this.imgEl.setAttribute('src', lightboxImage.imageUrl);
-            this.titleEl.innerHTML = lightboxImage.title;
-            lightboxEl.style.opacity = 1; // default is 0, to avoid flicker at load
+            imgEl.setAttribute('src', lightboxImage.imageUrl);
+            titleEl.innerHTML = lightboxImage.title;
         },
 
         setNavText: function(text) {
-            this.navTextEl.innerHTML = text;
+            navTextEl.innerHTML = text;
         },
 
         enableLeftArrow(enable) {

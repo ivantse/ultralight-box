@@ -2,6 +2,7 @@
     <head>
         <link type="text/css" rel="stylesheet" href="style.css">
         <script type="text/javascript" src="ImagesCollectionModel.js"></script>
+        <script type="text/javascript" src="GridView.js"></script>
         <script type="text/javascript" src="LightboxView.js"></script>
         <script type="text/javascript" src="LightboxImage.js"></script>
         <script type="text/javascript" src="FlickrApi.js"></script>
@@ -10,10 +11,16 @@
         <title>Ultralight Box</title>
     </head>
     <body>
-        <div id="lightbox"></div>
+        <div id="grid"></div>
+        <div id="lightbox-overlay"></div>
+        <div id="lightbox-container">
+            <div id="lightbox"></div>
+        </div>
         <script>
+            let gridEl = document.getElementById('grid');
             let lightboxEl = document.getElementById('lightbox');
-            new LightboxApp(lightboxEl);
+            let overlayEl = document.getElementById('lightbox-overlay');
+            new UltralightBoxApp(gridEl, lightboxEl, overlayEl);
         </script>
     </body>
 </html>
