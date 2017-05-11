@@ -10,8 +10,8 @@ body {
     position: fixed;
     width: 100%;
     top: 0;
-    margin-top: 5em;
-    margin-bottom: 5em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }
 
 #lightbox {
@@ -26,6 +26,7 @@ body {
 
 #lightbox #img-wrapper img {
     max-width: 250px;
+    max-height: 220px;
 }
 
 #lightbox a.nav-button {
@@ -51,8 +52,8 @@ body {
 }
 
 #lightbox #img-wrapper .nav-text, #lightbox #img-wrapper .img-title {
-    padding-top: 2em;
-    padding-bottom: 2em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
     background-color: #F58A4D;
     color: #000;
 }
@@ -124,5 +125,29 @@ body {
 
     #lightbox a.nav-button {
         font-size: 10em;
+    }
+}
+
+@media only screen and (min-width: 700px) {
+    #lightbox #img-wrapper img {
+        max-width: 600px;
+    }
+}
+
+@media only screen and (min-height: 600px) {
+    #lightbox-container {
+        margin-top: 5em;
+        margin-bottom: 5em;
+    }
+
+    #lightbox #img-wrapper .nav-text, #lightbox #img-wrapper .img-title {
+        padding-top: 2em;
+        padding-bottom: 2em;
+    }
+}
+
+@media only screen and (min-height: 600px) {
+    #lightbox #img-wrapper img {
+        max-height: 600px;
     }
 }
