@@ -7,6 +7,7 @@ function LightboxController(view, model) {
             let self = this;
             view.leftArrow.addEventListener('click', function() { self.previousImage(); });
             view.rightArrow.addEventListener('click', function() { self.nextImage(); });
+            view.imgEl.addEventListener('click', function() { self.nextImage(); });
             view.overlayEl.addEventListener('click', function() { self.dismissView(); });
             model.onImagesLoadedHandlers.push(function() {
                 self.updateCurrentImage();

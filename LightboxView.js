@@ -27,6 +27,7 @@ function LightboxView(lightboxEl, overlayEl) {
         overlayEl: overlayEl,
         leftArrow: leftArrow,
         rightArrow: rightArrow,
+        imgEl: imgEl,
 
         hide: function() {
             lightboxEl.style.display = 'none';
