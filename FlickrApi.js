@@ -18,6 +18,7 @@ var FlickrApi = {
                         let serverId = obj['server'];
                         let secret = obj['secret'];
                         return new LightboxImage({
+                            thumbnailUrl: `https://farm${farmId}.staticflickr.com/${serverId}/${id}_${secret}_s.jpg`,
                             imageUrl: `https://farm${farmId}.staticflickr.com/${serverId}/${id}_${secret}.jpg`,
                             title: obj['title'],
                         });

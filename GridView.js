@@ -22,7 +22,7 @@ function GridView(gridEl) {
 
             let imgEl = document.createElement('img');
             imgEl.setAttribute('class', 'grid-img');
-            imgEl.setAttribute('src', lightboxImage.imageUrl); // FIXME: use thumbnails
+            imgEl.setAttribute('src', lightboxImage.thumbnailUrl);
             cell.appendChild(imgEl);
 
             cell.addEventListener('click', function() {
