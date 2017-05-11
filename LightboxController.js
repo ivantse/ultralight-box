@@ -40,7 +40,6 @@ function LightboxController(view, model) {
         },
 
         openWithIndex: function(index) {
-            console.log('opening with index ' + index);
             if (index >= model.images.length) {
                 alert("Oops! You tried to select an image that isn't actualy there. Sorry about that!");
                 return;

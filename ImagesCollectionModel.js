@@ -38,7 +38,6 @@ function ImagesCollectionModel() {
 
         shouldLoadNextPage: function(currentIndex) {
             if (this.hasMoreImagesToLoad()) {
-                console.log('images length: ' + this.images.length);
                 return currentIndex > this.images.length - this.LOAD_OFFSET_THRESHOLD - 1;
             }
             return false;
