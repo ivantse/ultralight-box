@@ -5,6 +5,10 @@ body {
     font-weight: bold;
 }
 
+body.scroll-disabled {
+    overflow: hidden;
+}
+
 #lightbox-container {
     z-index: 101;
     position: fixed;

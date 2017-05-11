@@ -24,10 +24,11 @@
             <div id="lightbox"></div>
         </div>
         <script>
+            let bodyEl = document.getElementsByTagName('body')[0];
             let gridEl = document.getElementById('grid');
             let lightboxEl = document.getElementById('lightbox');
             let overlayEl = document.getElementById('lightbox-overlay');
-            new UltralightBoxApp(gridEl, lightboxEl, overlayEl);
+            new UltralightBoxApp(bodyEl, gridEl, lightboxEl, overlayEl);
         </script>
     </body>
 </html>

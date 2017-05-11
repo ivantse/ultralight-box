@@ -1,6 +1,8 @@
 function LightboxController(view, model) {
     return {
         currentIndex: 0,
+        onPresented: function(){},
+        onDismissed: function(){},
 
         // setting up view/model with events
         initialize: function() {
@@ -40,7 +42,7 @@ function LightboxController(view, model) {
             return this.currentIndex < model.images.length - 1;
         },
 
-        openWithIndex: function(index) {
+        presentWithIndex: function(index) {
             if (index >= model.images.length) {
                 alert("Oops! You tried to select an image that isn't actualy there. Sorry about that!");
                 return;
@@ -48,10 +50,12 @@ function LightboxController(view, model) {
             this.currentIndex = index;
             this.updateCurrentImage();
             view.show();
+            this.onPresented();
         },
 
         dismissView: function() {
             view.hide();
+            this.onDismissed();
         },
 
         previousImage: function() {

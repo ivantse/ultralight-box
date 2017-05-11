@@ -1,14 +1,18 @@
-function UltralightBoxApp(gridEl, lightboxEl, overlayEl) {
+function UltralightBoxApp(bodyEl, gridEl, lightboxEl, overlayEl) {
     let lightboxView = new LightboxView(lightboxEl, overlayEl);
     let model = new ImagesCollectionModel();
     let lightboxController = new LightboxController(lightboxView, model);
     lightboxController.initialize();
 
+    // disable scrolling when lightbox is presented
+    lightboxController.onPresented = function() { bodyEl.classList.add('scroll-disabled') };
+    lightboxController.onDismissed = function() { bodyEl.classList.remove('scroll-disabled') };
+
     let gridView = new GridView(gridEl);
     let gridController = new GridController(gridView, model);
     gridController.initialize({
         cellSelected: function(index) {
-            lightboxController.openWithIndex(index);
+            lightboxController.presentWithIndex(index);
         },
     });
 
