@@ -9,11 +9,11 @@ function LightboxView(lightboxEl, overlayEl) {
 
     let leftArrow = document.createElement('a');
     leftArrow.setAttribute('class', 'nav-button');
-    leftArrow.innerHTML = '&laquo;';
+    leftArrow.innerHTML = '&lsaquo;';
 
     let rightArrow = document.createElement('a');
     rightArrow.setAttribute('class', 'nav-button');
-    rightArrow.innerHTML = '&raquo;';
+    rightArrow.innerHTML = '&rsaquo;';
 
     imageWrapper.appendChild(navTextEl);
     imageWrapper.appendChild(imgEl);

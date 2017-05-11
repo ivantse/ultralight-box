@@ -15,7 +15,7 @@ function LightboxController(view, model) {
         },
 
         updateNavTitle: function() {
-            let text = `${this.currentIndex+1} of ${model.totalImagesCount}`;
+            let text = `${this.currentIndex+1} OF ${model.totalImagesCount}`;
             view.setNavText(text);
         },
 
