@@ -1,5 +1,3 @@
-'use strict';
-
 class LightboxImage {
     constructor(properties) {
         this.thumbnailUrl = properties['thumbnailUrl'];
@@ -8,6 +6,9 @@ class LightboxImage {
     }
 
     cacheImage() {
+        // setting src on an Image object saves into browser's cache
+        // so next request to the same URL will not make network
+        // request
         let image = new Image();
         image.src = this.imageUrl;
     }

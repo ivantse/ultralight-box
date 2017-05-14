@@ -1,8 +1,7 @@
-'use strict';
+const LOAD_OFFSET_THRESHOLD = 10;
 
 class LightboxController {
     constructor(view, model) {
-        this.LOAD_OFFSET_THRESHOLD = 10;
         this.currentIndex = 0;
         this.onPresented = function(){};
         this.onDismissed = function(){};
@@ -85,7 +84,7 @@ class LightboxController {
 
     _shouldLoadNextPage() {
         if (this.model.hasMoreImagesToLoad()) {
-            return this.currentIndex > this.model.images.length - this.LOAD_OFFSET_THRESHOLD - 1;
+            return this.currentIndex > this.model.images.length - LOAD_OFFSET_THRESHOLD - 1;
         }
         return false;
     }

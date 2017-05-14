@@ -1,5 +1,3 @@
-'use strict';
-
 class GridView {
     constructor(gridEl) {
         this.cellsCount = 0;

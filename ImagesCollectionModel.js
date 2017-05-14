@@ -1,8 +1,7 @@
-'use strict';
+const IMAGES_PER_LOAD = 10;
 
 class ImagesCollectionModel {
     constructor() {
-        this.IMAGES_PER_LOAD = 25;
         this.isLoading = false;
         this.pageOffset = 1;
         this.totalImagesCount = 0;
@@ -15,7 +14,7 @@ class ImagesCollectionModel {
         if (this.isLoading) { return }
         this.isLoading = true;
         let self = this;
-        this.flickrApi.getPhotos(this.pageOffset, this.IMAGES_PER_LOAD, function(totalCount, lightboxImages) {
+        this.flickrApi.getPhotos(this.pageOffset, IMAGES_PER_LOAD, function(totalCount, lightboxImages) {
             self.images.push.apply(self.images, lightboxImages);
             self.totalImagesCount = totalCount;
             self.pageOffset += 1;   // next page load will use the updated pageOffset

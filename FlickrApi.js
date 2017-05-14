@@ -1,15 +1,14 @@
-'use strict';
+const API_KEY = '168abff2bd195fbc1105fe5252dfb3dc';
+const PHOTOSET_ID = '72157626579923453';
 
 class FlickrApi {
     constructor(precacheImages) {
-        this.API_KEY = '168abff2bd195fbc1105fe5252dfb3dc';
-        this.PHOTOSET_ID = '72157626579923453';
         this.precacheImages = precacheImages;
     }
 
     getPhotos(page, perPage, success, failure) {
         let self = this;
-        let url = `https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=${this.API_KEY}&photoset_id=${this.PHOTOSET_ID}&format=json&nojsoncallback=1&per_page=${perPage}&page=${page}`;
+        let url = `https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=${API_KEY}&photoset_id=${PHOTOSET_ID}&format=json&nojsoncallback=1&per_page=${perPage}&page=${page}`;
         let xhr = new XMLHttpRequest();
         xhr.open('GET', url, true);
         xhr.onload = function() {

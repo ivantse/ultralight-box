@@ -1,3 +1,5 @@
+const SCROLL_THRESHOLD_OFFSET = 50;   // so we load the next images before we get to the bottom of window
+
 class UltralightBoxApp {
     constructor(bodyEl, gridEl, lightboxEl, overlayEl) {
         let lightboxView = new LightboxView(lightboxEl, overlayEl);
@@ -12,7 +14,6 @@ class UltralightBoxApp {
         gridView.onCellSelected = function(index) { lightboxController.presentWithIndex(index) };
         let gridController = new GridController(gridView, model);
 
-        let SCROLL_THRESHOLD_OFFSET = 50;   // so we load the next images before we get to the bottom of window
         let loadMorePagesIfNeeded = function() {
             let gridElBottom = gridEl.getBoundingClientRect().bottom;
             let pastScrollThreshold = (gridElBottom - SCROLL_THRESHOLD_OFFSET <= window.innerHeight);
